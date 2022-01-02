@@ -29,6 +29,7 @@ Route::group(
         Route::resource('Social_contact' , 'Social_contactController');
         Route::resource('Blog' , 'BlogController');
         Route::get('Blog/home/{id}', 'BlogController@home')->name('Blog.home');
+        Route::get('Problem/home/{id}', 'ProblemController@home')->name('Problem.home');
 
 });
 

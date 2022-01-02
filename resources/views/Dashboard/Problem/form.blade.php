@@ -62,8 +62,8 @@
     <div class="form-group row">
         <label class="col-form-label col-lg-3">problem Description<span class="text-danger">*</span></label>
         <div class="col-lg-9">
-            {!!Form::file('file',null,['class'=>'form-control'])!!}
-
+{{--            {!!Form::file('file_name[]',null,['multiple' =>true,'class'=>'form-control'])!!}--}}
+            <input type="file" accept="image/*" name="photos[]" multiple>
         </div>
     </div>
 

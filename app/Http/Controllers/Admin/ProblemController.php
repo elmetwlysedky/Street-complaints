@@ -32,26 +32,48 @@ class ProblemController extends Controller
     }
 
 
-    public function store(ProblemRequest $request , AttachmentRequest $request_attach)
+    public function store(Request $request )
     {
-        $data = $request->validated();
+//        $data = $request->validated();
 
-//        $file =$request_attach->validated();
-        $path = Storage::disk('public')->putFile('/Attachment',$request_attach->file);
-        $data['file']= $path;
-        Problem::create($data);
-        Problem::with('attachment')->create($data);
+        $Problems = new Problem();
+        $Problems->name =  $request->name;
+        $Problems->user_id =$request->user_id;
+        $Problems->city_id= $request->city_id;
+        $Problems->problem_destination_id = $request->problem_destination_id;
+        $Problems->status = $request->status;
+        $Problems->reason_id = $request->reason_id;
+        $Problems->tools = $request->tools;
+        $Problems->causing = $request->causing;
+        $Problems->description = $request->description;
+        $Problems->save();
+
+
+        if($request->hasfile('photos'))
+        {
+            foreach($request->file('photos') as $file) {
+
+                $name = Storage::disk('public')->putFile('/Attachment/problem/' . $Problems->name, $file);
+
+                $images = new Attachment();
+                $images->file_name = $name;
+                $images->problem_id = $Problems->id;
+                $images->save();
+            }
+        }
+
 
         return redirect()->route('Problem.index');
     }
 
     public function show($id)
     {
-        $Problem =Problem::findorfail($id);
+        $Problem = Problem::findorfail($id);
+
         $Problem_destinations = problem_Destination::pluck('name','id');
         $Cities = City::pluck('name','id');
         $Reasons = Reason::pluck('name','id');
-        $Attachment = Attachment::pluck('file','problem_id');
+        $Attachment = Attachment::pluck('file_name','problem_id');
 
         return view('Dashboard.Problem.show', compact('Problem','Cities','Problem_destinations','Reasons','Attachment'));
     }
@@ -72,6 +94,20 @@ class ProblemController extends Controller
         $Problem = Problem::findorfail($id);
         $data = $request->validated();
         $Problem ->update($data);
+
+        if($request->hasfile('photos'))
+        {
+            foreach($request->file('photos') as $file) {
+
+                $name = Storage::disk('public')->putFile('/Attachment/problem/' . $request->name, $file);
+
+                $images = new Attachment();
+                $images->file_name = $name;
+                $images->problem_id = $Problem->id;
+                $images->save();
+            }
+        }
+
         return redirect()->route('Problem.index');
     }
 
@@ -81,5 +117,11 @@ class ProblemController extends Controller
         $Problem=Problem::findorFail($id);
         $Problem->delete();
         return redirect()->route('Problem.index');
+    }
+
+
+    public function home($id){
+        $Problem = Problem::findorfail($id);
+        return view('Dashboard.Problem.home',compact('Problem'));
     }
 }

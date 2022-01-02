@@ -15,9 +15,8 @@ class CreateAttachmentsTable extends Migration
     {
         Schema::create('attachments', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('problem_id')->unsigned();
-            $table->foreign('problem_id')->references('id')->on('problems');
-            $table->string('file');
+            $table->string('file_name');
+            $table->integer('problem_id');
             $table->timestamps();
             $table->softDeletes();
         });

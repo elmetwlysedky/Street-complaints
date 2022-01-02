@@ -40,7 +40,7 @@ class Problem extends Model
     }
 
     public function attachment(){
-        return $this->hasMany(Attachment::class , 'problem_id');
+        return $this->hasMany(Attachment::class, 'problem_id');
     }
 
     public function comment(){

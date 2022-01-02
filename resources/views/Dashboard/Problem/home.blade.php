@@ -95,6 +95,18 @@
         </div>
 
 
+        <div class="form-group row">
+            <label class="col-form-label col-lg-3">Add Comment<span class="text-danger">*</span></label>
+            <div class="col-lg-9">
+                {!!Form::text('causing', null,['class'=>'form-control'])!!}
+            </div>
+                <div class="col-lg-9">
+                <input type="file" accept="image/*" name="photos[]" multiple>
+                </div>
+
+        </div>
+
+
     </div>
 </div>
 <!-- /post -->

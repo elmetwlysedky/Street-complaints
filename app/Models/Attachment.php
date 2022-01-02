@@ -11,9 +11,11 @@ class Attachment extends Model
     use HasFactory;
     use SoftDeletes;
     protected $dates=['deleted_at'];
-    protected $fillable = ['file', 'problem_id'];
+    protected $fillable = ['file_name', 'problem_id'];
 
-    public function problem(){
-        return $this->belongsTo(Problem::class , 'problem_id');
+
+    public function problem()
+    {
+        return $this->belongsTo(Problem::class,'problem_id');
     }
 }

@@ -71,11 +71,11 @@ Blogs
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right">
-                                    <a href="{{route('Social_contact.show',[$item->id])}}" class="dropdown-item"><i class="icon-file-eye2 mr-3 icon"></i> show </a>
-                                    <a href="{{route('Social_contact.edit',$item->id)}}" class="dropdown-item"><i class="icon-pencil7"></i> Edit </a>
+                                    <a href="{{route('Blog.show',[$item->id])}}" class="dropdown-item"><i class="icon-file-eye2 mr-3 icon"></i> show </a>
+                                    <a href="{{route('Blog.edit',$item->id)}}" class="dropdown-item"><i class="icon-pencil7"></i> Edit </a>
 
                                     <div class="dropdown-divider"></div>
-                                    <form action="{{route('Social_contact.destroy',$item->id)}}" method="POST"  >
+                                    <form action="{{route('Blog.destroy',$item->id)}}" method="POST"  >
                                         @csrf
                                         @method('DELETE')
 
