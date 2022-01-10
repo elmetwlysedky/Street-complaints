@@ -35,8 +35,8 @@
             <ul class="list-inline list-inline-dotted text-muted mb-3">
                 <li class="list-inline-item">By <a href="#" class="text-muted">{{$Problem->user->name}}</a></li>
                 <li class="list-inline-item">{{$Problem->created_at->format('d/m/Y')}}</li>
-                <li class="list-inline-item"><a href="#" class="text-muted">12 comments</a></li>
-                <li class="list-inline-item"><a href="#" class="text-muted"><i class="icon-heart6 font-size-base text-pink mr-2"></i> 281</a></li>
+                <li class="list-inline-item"><a href="#" class="text-muted">{{$Problem->comment->count()}}</a></li>
+                <li class="list-inline-item"><a href="#" class="text-muted"><i class="icon-star-full2 font-size-base text-pink mr-2"></i> {{$Problem->rate->rate}}</a></li>
             </ul>
             <div class="mb-3">
                 <p>{{$Problem->tool}}</p>
@@ -94,18 +94,70 @@
             <p>{{$Problem->description}}</p>
         </div>
 
+        <h5 class="font-weight-semibold">Problem Rate</h5>
+
+        {!!Form::open(['route' => 'Rate.store', 'class'=>'form-validate-jquery','method'=>'post','enctype'=>'multipart/form-data'])!!}
+        <input type="hidden" name="problem_id" value="{{$Problem->id}}">
 
         <div class="form-group row">
             <label class="col-form-label col-lg-3">Add Comment<span class="text-danger">*</span></label>
             <div class="col-lg-9">
-                {!!Form::text('causing', null,['class'=>'form-control'])!!}
+                {!!Form::text('comment', null,['class'=>'form-control'])!!}
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="col-form-label col-lg-3">Item Rate <span class="text-danger">*</span></label>
+            <div class="col-lg-9">
+                {!! Form::select('item_id',$Item , null, ['class'=>'form-control']) !!}
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="col-form-label col-lg-3">Rate <span class="text-danger">*</span></label>
+            <div class="col-lg-9">
+
+                {!! Form::select('rate'
+                ,['1'=>'1 Star', '2'=>'2 Stars' , '3'=>'3 Stars', '4'=>'4 Stars', '5'=>'5 Stars']
+                ,['class'=>'form-control'])!!}
+            </div>
+        </div>
+
+
+        <button type="submit" class="btn bg-teal-400 btn-labeled ">Rate</button>
+        {!! Form::close() !!}
+
+
+              <h5 class="font-weight-semibold">Problem Comments</h5>
+              @foreach($Problem->comment as $Comment)
+              <ul class="list-inline list-inline-dotted text-muted mb-3">
+                  <li class="list-inline-item"><a href="{{route('Comment.show',$Comment->id)}}" class="text-muted">{{$Comment->content}}</a></li>
+                  <li class="list-inline-item"> <img class="rounded-circle" src="/storage/{{$Comment->file}}" width="40" height="40" alt=""></li>
+                  <li class="list-inline-item">{{$Comment->created_at->format('d/m/Y')}}</li>
+                </ul>
+              @endforeach
+              <div class="mb-3">
+
+
+
+
+              {!!Form::open(['route' => 'Comment.store', 'class'=>'form-validate-jquery','method'=>'post','enctype'=>'multipart/form-data'])!!}
+
+        <input type="hidden" name="user_id" value="{{auth()->user()->id}}">
+        <input type="hidden" name="problem_id" value="{{$Problem->id}}">
+
+        <div class="form-group row">
+            <label class="col-form-label col-lg-3">Add Comment<span class="text-danger">*</span></label>
+            <div class="col-lg-9">
+                {!!Form::text('content', null,['class'=>'form-control'])!!}
             </div>
                 <div class="col-lg-9">
-                <input type="file" accept="image/*" name="photos[]" multiple>
+                <input type="file" accept="image/*" name="file" >
                 </div>
 
         </div>
-
+        <button type="submit" class="btn bg-teal-400 btn-labeled ">create</button>
+        {!! Form::close() !!}
 
     </div>
 </div>

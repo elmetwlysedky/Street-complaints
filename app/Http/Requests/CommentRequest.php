@@ -13,7 +13,7 @@ class CommentRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,10 @@ class CommentRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'user_id' => 'required',
+            'problem_id' => 'required',
+            'content' => 'required',
+            'file' => 'sometimes',
         ];
     }
 }

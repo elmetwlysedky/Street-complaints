@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class AttachmentRequest extends FormRequest
+class ReplyRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,8 +24,10 @@ class AttachmentRequest extends FormRequest
     public function rules()
     {
         return [
-                'problem_id' => 'required',
-                'file' => 'required',
+            'user_id' => 'required',
+            'comment_id' => 'required',
+            'content' => 'required',
+            'file' => 'sometimes|image',
         ];
     }
 }

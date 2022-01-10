@@ -30,6 +30,12 @@ Route::group(
         Route::resource('Blog' , 'BlogController');
         Route::get('Blog/home/{id}', 'BlogController@home')->name('Blog.home');
         Route::get('Problem/home/{id}', 'ProblemController@home')->name('Problem.home');
+        Route::resource('Comment', 'CommentController');
+        Route::resource('Reply' , 'ReplyController');
+        Route::resource('Blog_comment' , 'Blog_commentController');
+        Route::resource('Rate' , 'Rate_problemController');
+        Route::resource('Profile' , 'ProfileController');
+
 
 });
 

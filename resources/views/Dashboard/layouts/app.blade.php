@@ -67,7 +67,7 @@
 
         <span class="navbar-text ml-md-3">
 				<span class="badge badge-mark border-orange-300 mr-2"></span>
-				Morning, Victoria!
+				Morning, {{auth()->user()->name}}!
 			</span>
 
         <ul class="navbar-nav ml-md-auto">
@@ -255,8 +255,8 @@
                         <a href="#">
                             <img src="/Dashboard/global_assets/images/placeholders/placeholder.jpg" class="img-fluid rounded-circle shadow-1 mb-3" width="80" height="80" alt="">
                         </a>
-                        <h6 class="mb-0 text-white text-shadow-dark">Victoria Baker</h6>
-                        <span class="font-size-sm text-white text-shadow-dark">Santa Ana, CA</span>
+                        <h6 class="mb-0 text-white text-shadow-dark">{{auth()->user()->name}}</h6>
+                        <span class="font-size-sm text-white text-shadow-dark">{{auth()->user()->city->name}}</span>
                     </div>
 
                     <div class="sidebar-user-material-footer">
@@ -267,7 +267,7 @@
                 <div class="collapse" id="user-nav">
                     <ul class="nav nav-sidebar">
                         <li class="nav-item">
-                            <a href="#" class="nav-link">
+                            <a href="{{route('Profile.index')}}" class="nav-link">
                                 <i class="icon-user-plus"></i>
                                 <span>My profile</span>
                             </a>

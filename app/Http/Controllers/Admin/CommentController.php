@@ -3,26 +3,22 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\CommentRequest;
+use App\Models\Comment;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class CommentController extends Controller
 {
 
-
-
-    public function create()
-    {
-        return view('Dashboard.Comment.create');
-    }
-
-
     public function store(CommentRequest $request)
     {
         $data = $request->validated();
-        $path = Storage::disk('public')->putFile('Comment',$request->photo);
-        $data['photo']= $path;
+        $path = Storage::disk('public')->putFile('Comment',$request->file);
+        $data['file']= $path;
 
         Comment::create($data);
+
         return redirect()->back();
     }
 

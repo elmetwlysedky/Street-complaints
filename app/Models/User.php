@@ -46,6 +46,12 @@ class User extends Authenticatable
         return $this->hasMany(Blog_comment::class, 'user_id');
     }
 
+    public function profile()
+    {
+        return $this->hasOne(Profile::class, 'user_id');
+    }
+
+
     protected $hidden = [
         'password',
         'remember_token',

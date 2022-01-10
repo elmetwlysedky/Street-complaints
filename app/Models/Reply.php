@@ -6,12 +6,12 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Comment extends Model
+class Reply extends Model
 {
     use HasFactory;
     use SoftDeletes;
     protected $dates = ['deleted_at'];
-    protected $fillable = ['user_id', 'problem_id', 'content', 'file'];
+    protected $fillable = ['user_id', 'comment_id', 'content', 'file'];
 
     public function user()
     {
@@ -19,12 +19,6 @@ class Comment extends Model
     }
 
     public function problem(){
-        return $this->belongsTo(Problem::class , 'problem_id');
+        return $this->belongsTo(Comment::class , 'comment_id');
     }
-
-    public function reply(){
-        return $this->hasMany(Reply::class , 'comment_id');
-    }
-
-
 }

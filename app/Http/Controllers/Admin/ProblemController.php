@@ -7,6 +7,8 @@ use App\Http\Requests\AttachmentRequest;
 use App\Http\Requests\ProblemRequest;
 use App\Models\Attachment;
 use App\Models\City;
+use App\Models\Comment;
+use App\Models\Item;
 use App\Models\Problem;
 use App\Models\Problem_destination;
 use App\Models\Reason;
@@ -70,12 +72,7 @@ class ProblemController extends Controller
     {
         $Problem = Problem::findorfail($id);
 
-        $Problem_destinations = problem_Destination::pluck('name','id');
-        $Cities = City::pluck('name','id');
-        $Reasons = Reason::pluck('name','id');
-        $Attachment = Attachment::pluck('file_name','problem_id');
-
-        return view('Dashboard.Problem.show', compact('Problem','Cities','Problem_destinations','Reasons','Attachment'));
+        return view('Dashboard.Problem.show', compact('Problem'));
     }
 
 
@@ -122,6 +119,7 @@ class ProblemController extends Controller
 
     public function home($id){
         $Problem = Problem::findorfail($id);
-        return view('Dashboard.Problem.home',compact('Problem'));
+        $Item = Item::pluck('name','id');
+        return view('Dashboard.Problem.home',compact('Problem', 'Item'));
     }
 }

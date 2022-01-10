@@ -26,10 +26,13 @@ class increase_view_blog
      */
     public function handle(View_blog $event)
     {
-        $this->update($event->Blog);
+        if (!session()->has('visit_blog')) {
+            $this->update($event->Blog);
+        }
     }
     function update($Blog){
         $Blog ->view = $Blog ->view + 1;
         $Blog->save();
+        session()->put('visit_blog', $Blog->id);
     }
 }

@@ -33,10 +33,10 @@
             </h4>
 
             <ul class="list-inline list-inline-dotted text-muted mb-3">
-                <li class="list-inline-item">By <a href="#" class="text-muted">{{$Problem->user->name}}</a></li>
+                <li class="list-inline-item"><a href="#" class="font-weight-semibold">{{$Problem->user->name}}</a></li>
                 <li class="list-inline-item">{{$Problem->created_at->format('d/m/Y')}}</li>
-                <li class="list-inline-item"><a href="#" class="text-muted">12 comments</a></li>
-                <li class="list-inline-item"><a href="#" class="text-muted"><i class="icon-heart6 font-size-base text-pink mr-2"></i> 281</a></li>
+                <li class="list-inline-item"><a href="#" class="text-muted"><i class="icon-comment font-size-base "></i> : {{$Problem->comment->count()}}</a></li>
+{{--                <li class="list-inline-item"><a href="#" class="text-muted"><i class="icon-heart6 font-size-base text-pink mr-2"></i> 281</a></li>--}}
             </ul>
             <div class="mb-3">
                 <p>{{$Problem->tool}}</p>
@@ -71,11 +71,6 @@
 
                     <li>
                         <i class="icon-checkmark3 text-success mr-2"></i>
-                        {{$Problem->Reason->name}}
-                    </li>
-
-                    <li>
-                        <i class="icon-checkmark3 text-success mr-2"></i>
                         {{$Problem->tool}}
                     </li>
 
@@ -94,6 +89,17 @@
             <p>{{$Problem->description}}</p>
         </div>
 
+
+        <h5 class="font-weight-semibold">Problem Comments</h5>
+        @foreach($Problem->comment as $Comment)
+
+            <ul class="list-inline list-inline-dotted text-muted mb-3">
+                <li class="list-inline-item"><a href="#" class="font-weight-semibold">{{$Comment->user->name}}</a></li>
+                <li class="list-inline-item"><a href="{{route('Comment.show',$Comment->id)}}" class="text-muted">{{$Comment->content}}</a></li>
+                <li class="list-inline-item"> <img class="rounded-circle" src="/storage/{{$Comment->file}}" width="40" height="40" alt=""></li>
+                <li class="list-inline-item">{{$Comment->created_at->format('d/m/Y')}}</li>
+            </ul>
+        @endforeach
 
     </div>
 </div>

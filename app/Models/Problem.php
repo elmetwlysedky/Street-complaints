@@ -48,6 +48,6 @@ class Problem extends Model
     }
 
     public function rate(){
-        return $this->hasMany(Rate_problem::class , 'problem_id');
+        return $this->hasOne(Rate_problem::class , 'problem_id');
     }
 }
