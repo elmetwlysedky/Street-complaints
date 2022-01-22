@@ -35,8 +35,10 @@
             <ul class="list-inline list-inline-dotted text-muted mb-3">
                 <li class="list-inline-item">By <a href="#" class="text-muted">{{$Problem->user->name}}</a></li>
                 <li class="list-inline-item">{{$Problem->created_at->format('d/m/Y')}}</li>
-                <li class="list-inline-item"><a href="#" class="text-muted">{{$Problem->comment->count()}}</a></li>
+                <li class="list-inline-item"><a href="#" class="text-muted"><i class="icon-comment font-size-base "></i> :{{$Problem->comment->count()}}</a></li>
+            @isset($Problem->rate)
                 <li class="list-inline-item"><a href="#" class="text-muted"><i class="icon-star-full2 font-size-base text-pink mr-2"></i> {{$Problem->rate->rate}}</a></li>
+            @endisset
             </ul>
             <div class="mb-3">
                 <p>{{$Problem->tool}}</p>
@@ -75,13 +77,17 @@
                     </li>
 
                     <li>
+                        @isset($Problem->tools)
                         <i class="icon-checkmark3 text-success mr-2"></i>
-                        {{$Problem->tool}}
+                        {{$Problem->tools}}
+                        @endisset
                     </li>
 
                     <li>
+                        @isset($Problem->causing)
                         <i class="icon-checkmark3 text-success mr-2"></i>
                         {{$Problem->causing}}
+                        @endisset
                     </li>
 
                 </ul>
@@ -94,8 +100,8 @@
             <p>{{$Problem->description}}</p>
         </div>
 
+        @if ($Problem->user_id ==Auth::id())
         <h5 class="font-weight-semibold">Problem Rate</h5>
-
         {!!Form::open(['route' => 'Rate.store', 'class'=>'form-validate-jquery','method'=>'post','enctype'=>'multipart/form-data'])!!}
         <input type="hidden" name="problem_id" value="{{$Problem->id}}">
 
@@ -127,7 +133,7 @@
         <button type="submit" class="btn bg-teal-400 btn-labeled ">Rate</button>
         {!! Form::close() !!}
 
-
+        @endif
               <h5 class="font-weight-semibold">Problem Comments</h5>
               @foreach($Problem->comment as $Comment)
               <ul class="list-inline list-inline-dotted text-muted mb-3">

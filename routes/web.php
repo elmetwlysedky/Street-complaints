@@ -18,8 +18,17 @@ Route::group(
         Route::resource('city', 'CityController');
         Route::resource('Problem_Destination', 'Problem_destinationController');
         Route::resource('Reason' , 'ReasonController');
+
+        ############################### Route problem ###############################
         Route::resource('Problem' , 'ProblemController');
-        Route::resource('Attachment', 'Attachment_problemController');
+        Route::get('Problem/new', 'ProblemController@new')->name('Problem.new');
+        Route::get('Problem/under_review', 'ProblemController@under_review')->name('Problem.under_review');
+        Route::get('Problem/previewed', 'ProblemController@previewed')->name('Problem.previewed');
+        Route::get('Problem/closed', 'ProblemController@closed')->name('Problem.closed');
+        Route::get('Problem/home/{id}', 'ProblemController@home')->name('Problem.home');
+        Route::put('Problem/status/{id}', 'ProblemController@status')->name('Problem.status');
+        ################################ end route problem ##############################
+
         Route::resource('Comment', 'CommentController');
         Route::resource('Item' , 'ItemController');
         Route::resource('Contact' , 'ContactController');
@@ -29,7 +38,6 @@ Route::group(
         Route::resource('Social_contact' , 'Social_contactController');
         Route::resource('Blog' , 'BlogController');
         Route::get('Blog/home/{id}', 'BlogController@home')->name('Blog.home');
-        Route::get('Problem/home/{id}', 'ProblemController@home')->name('Problem.home');
         Route::resource('Comment', 'CommentController');
         Route::resource('Reply' , 'ReplyController');
         Route::resource('Blog_comment' , 'Blog_commentController');

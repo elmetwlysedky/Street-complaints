@@ -36,7 +36,29 @@
                 <li class="list-inline-item"><a href="#" class="font-weight-semibold">{{$Problem->user->name}}</a></li>
                 <li class="list-inline-item">{{$Problem->created_at->format('d/m/Y')}}</li>
                 <li class="list-inline-item"><a href="#" class="text-muted"><i class="icon-comment font-size-base "></i> : {{$Problem->comment->count()}}</a></li>
-{{--                <li class="list-inline-item"><a href="#" class="text-muted"><i class="icon-heart6 font-size-base text-pink mr-2"></i> 281</a></li>--}}
+                @isset($Problem->rate)
+                <li class="list-inline-item"><a href="#" class="text-muted"><i class="icon-star-full2 font-size-base text-pink mr-2"></i> {{$Problem->rate->rate}}</a></li>
+                @endisset
+
+                <li class="list-inline-item">
+
+                    <form action="{{route('Problem.status',$Problem->id)}}" method="post" >
+                        @method('PUT')
+                        @csrf
+
+                        <select onchange="this.form.submit()" name="status" >
+
+                            <option class="text-muted" selected>{{$Problem->status}}</option>
+                            <option value="new">New</option>
+                            <option value="under_review">under review</option>
+                            <option value="previewed">previewed</option>
+                            <option value="closed">closed</option>
+
+                        </select>
+                    </form>
+
+                </li>
+
             </ul>
             <div class="mb-3">
                 <p>{{$Problem->tool}}</p>
@@ -71,12 +93,21 @@
 
                     <li>
                         <i class="icon-checkmark3 text-success mr-2"></i>
-                        {{$Problem->tool}}
+                        {{$Problem->Reason->name}}
                     </li>
 
                     <li>
+                        @isset($Problem->tools)
+                        <i class="icon-checkmark3 text-success mr-2"></i>
+                        {{$Problem->tools}}
+                        @endisset
+                    </li>
+
+                    <li>
+                        @isset($Problem->causing)
                         <i class="icon-checkmark3 text-success mr-2"></i>
                         {{$Problem->causing}}
+                        @endisset
                     </li>
 
                 </ul>

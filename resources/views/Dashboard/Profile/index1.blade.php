@@ -20,11 +20,11 @@
 
         <!-- Cover area -->
         <div class="profile-cover">
-            <div class="profile-cover-img" style="background-image: url(/Dashboard/global_assets/images/placeholders/cover.jpg)"></div>
+            <div class="profile-cover-img" style="background-image: url(/storage/{{$profile->back_ground}})"></div>
             <div class="media align-items-center text-center text-md-left flex-column flex-md-row m-0">
                 <div class="mr-md-3 mb-2 mb-md-0">
                     <a href="#" class="profile-thumb">
-                        {{--								<img src="/storage/{{$profile->photo}}" class="border-white rounded-circle" width="48" height="48" alt="">--}}
+                        <img src="/storage/{{$profile->photo}}" class="border-white rounded-circle" width="48" height="48" alt="">
                     </a>
                 </div>
 
@@ -42,7 +42,7 @@
         <!-- /cover area -->
 
         <!-- Profile info -->
-     {!!Form::open(['route' => 'Profile.update','class'=>'form-validate-jquery' ,'method'=>'post','enctype'=>'multipart/form-data'])!!}
+     {!!Form::open(['route' => ['Profile.update', auth()->user()->id],'class'=>'form-validate-jquery' ,'method'=>'PATCH','enctype'=>'multipart/form-data'])!!}
 
         <div class="card">
             <div class="card-header header-elements-inline">
@@ -55,7 +55,7 @@
                     </div>
                 </div>
             </div>
-
+            <input type="hidden" value="{{auth()->user()->id}}" name="user_id">
             <div class="card-body">
                 <form action="#">
                     <div class="form-group">
@@ -82,12 +82,12 @@
                             <div class="col-md-6">
                                 <br>
                                 <label>bio</label>
-                                    <input type="text" name="about" class="form-control">
+                                    <input type="text" name="about" class="form-control" value="{{auth()->user()->profile->about}}">
                             </div>
                             <div class="col-md-6">
                                 <br>
                                 <label>gender</label>
-                                <select class="form-control form-control-select2" name="gender">
+                                <select class="form-control form-control-select2" name="gender" value="{{auth()->user()->profile->gender}}">
                                        <option value="1">male</option>
                                        <option value="0">female</option>
                                 </select>
@@ -108,7 +108,7 @@
                             <div class="col-md-6">
                                 <br>
                                 <label>Date of Birth:</label>
-                                    <input type="date" class="form-control" name="birth_of_date">
+                                    <input type="date" class="form-control" name="date_of_birth"value="{{auth()->user()->profile->date_of_birth}}">
                                 </div>
 
 

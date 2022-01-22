@@ -253,7 +253,9 @@
                 <div class="sidebar-user-material-body">
                     <div class="card-body text-center">
                         <a href="#">
-                            <img src="/Dashboard/global_assets/images/placeholders/placeholder.jpg" class="img-fluid rounded-circle shadow-1 mb-3" width="80" height="80" alt="">
+                            @isset($profile->photo)
+                            <img src="/storage/{{auth()->user()->profile->photo}}" class="img-fluid rounded-circle shadow-1 mb-3" width="80" height="80" alt="">
+                            @endisset
                         </a>
                         <h6 class="mb-0 text-white text-shadow-dark">{{auth()->user()->name}}</h6>
                         <span class="font-size-sm text-white text-shadow-dark">{{auth()->user()->city->name}}</span>
@@ -267,7 +269,7 @@
                 <div class="collapse" id="user-nav">
                     <ul class="nav nav-sidebar">
                         <li class="nav-item">
-                            <a href="{{route('Profile.index')}}" class="nav-link">
+                            <a href="{{route('Profile.show',auth()->user()->id)}}" class="nav-link">
                                 <i class="icon-user-plus"></i>
                                 <span>My profile</span>
                             </a>
@@ -331,6 +333,10 @@
                         <ul class="nav nav-group-sub" data-submenu-title="Themes">
                             <li class="nav-item"><a href="{{route('Problem.index')}}" class="nav-link">Problems</a></li>
                             <li class="nav-item"><a href="{{route('Problem.create')}}" class="nav-link">Add Problem</a></li>
+                            <li class="nav-item"><a href="{{url('Problem/new')}}" class="nav-link">New Problem</a></li>
+                            <li class="nav-item"><a href="{{route('Problem.under_review')}}" class="nav-link">Under review Problem</a></li>
+                            <li class="nav-item"><a href="{{route('Problem.previewed')}}" class="nav-link">Previewed Problem</a></li>
+                            <li class="nav-item"><a href="{{route('Problem.closed')}}" class="nav-link">Closed Problem</a></li>
                         </ul>
                     </li>
                     <li class="nav-item nav-item-submenu">

@@ -10,8 +10,9 @@ use Illuminate\Support\Facades\Storage;
 
 class ProfileController extends Controller
 {
-    public function index(){
-        return view('Dashboard.Profile.index1');
+    public function show($id){
+        $profile = Profile::findorfail($id);
+        return view('Dashboard.Profile.index1' , compact('profile'));
     }
 
     public function update(Request $request , $id){
@@ -26,20 +27,20 @@ class ProfileController extends Controller
 
 
 
-            $Photo = Storage::disk('public')->putFile('Profile', $request->profile);
+            $Photo = Storage::disk('public')->putFile('Profile', $request->photo);
 
 
             $Background = Storage::disk('public')->putFile('background', $request->back_ground);
 
 
         $Profile = new Profile();
-        $Profile->user_id = $User->id;
+        $Profile->user_id = $request->user_id;
         $Profile->gender = $request->gender;
         $Profile->about = $request->about;
         $Profile->photo = $Photo;
-        $Profile->back_gound = $Background ;
+        $Profile->back_ground = $Background ;
         $Profile->date_of_birth = $request ->date_of_birth;
-        $Profile->save();
+        $Profile->update();
 
         return redirect()->back();
 
