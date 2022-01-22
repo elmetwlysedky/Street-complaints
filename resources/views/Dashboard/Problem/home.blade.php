@@ -36,8 +36,10 @@
                 <li class="list-inline-item">By <a href="#" class="text-muted">{{$Problem->user->name}}</a></li>
                 <li class="list-inline-item">{{$Problem->created_at->format('d/m/Y')}}</li>
                 <li class="list-inline-item"><a href="#" class="text-muted"><i class="icon-comment font-size-base "></i> :{{$Problem->comment->count()}}</a></li>
+                <li class="list-inline-item">{{$Problem->status}}</li>
+
             @isset($Problem->rate)
-                <li class="list-inline-item"><a href="#" class="text-muted"><i class="icon-star-full2 font-size-base text-pink mr-2"></i> {{$Problem->rate->rate}}</a></li>
+                <li class="list-inline-item"><a href="#" class="text-muted"><i class="icon-star-full2 font-size-base text-pink mr-2"></i>{{$Problem->rate->rate}}</a></li>
             @endisset
             </ul>
             <div class="mb-3">

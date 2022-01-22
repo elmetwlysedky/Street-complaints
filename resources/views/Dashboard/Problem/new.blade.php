@@ -52,10 +52,13 @@ New Problems
                     <th>Reason</th>
                     <th>Description</th>
                     <th>Actions</th>
+
                 </tr>
             </thead>
             <div>
-                @foreach ($Problems as $item )
+
+                @isset($NewProblem)
+                @foreach ($NewProblem as $item )
                 <tr>
                     <td>{{$item->name}}</td>
                     <td>{{$item->user->name}}</td>
@@ -89,7 +92,7 @@ New Problems
                 </tr>
             </div>
                 @endforeach
-
+                @endisset
             </tbody>
         </table>
 

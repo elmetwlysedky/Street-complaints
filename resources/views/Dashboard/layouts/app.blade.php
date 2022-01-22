@@ -253,7 +253,7 @@
                 <div class="sidebar-user-material-body">
                     <div class="card-body text-center">
                         <a href="#">
-                            @isset($profile->photo)
+                            @isset(auth()->user()->profile->photo)
                             <img src="/storage/{{auth()->user()->profile->photo}}" class="img-fluid rounded-circle shadow-1 mb-3" width="80" height="80" alt="">
                             @endisset
                         </a>
@@ -333,7 +333,7 @@
                         <ul class="nav nav-group-sub" data-submenu-title="Themes">
                             <li class="nav-item"><a href="{{route('Problem.index')}}" class="nav-link">Problems</a></li>
                             <li class="nav-item"><a href="{{route('Problem.create')}}" class="nav-link">Add Problem</a></li>
-                            <li class="nav-item"><a href="{{url('Problem/new')}}" class="nav-link">New Problem</a></li>
+                            <li class="nav-item"><a href="{{route('Problem.new')}}" class="nav-link">New Problem</a></li>
                             <li class="nav-item"><a href="{{route('Problem.under_review')}}" class="nav-link">Under review Problem</a></li>
                             <li class="nav-item"><a href="{{route('Problem.previewed')}}" class="nav-link">Previewed Problem</a></li>
                             <li class="nav-item"><a href="{{route('Problem.closed')}}" class="nav-link">Closed Problem</a></li>
@@ -427,68 +427,7 @@
     <!-- Main content -->
     <div class="content-wrapper">
 
-        <!-- Page header -->
-        <div class="page-header page-header-light">
-            <div class="page-header-content header-elements-md-inline">
-                <div class="page-title d-flex">
-                    <h4><i class="icon-arrow-right6 mr-2"></i> <span class="font-weight-semibold">Home</span> - Dashboard</h4>
-                    <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
-                </div>
 
-                <div class="header-elements d-none">
-                    <div class="d-flex justify-content-center">
-                        <a href="#" class="btn btn-link btn-float font-size-sm font-weight-semibold text-default">
-                            <i class="icon-bars-alt text-pink-300"></i>
-                            <span>Statistics</span>
-                        </a>
-                        <a href="#" class="btn btn-link btn-float font-size-sm font-weight-semibold text-default">
-                            <i class="icon-calculator text-pink-300"></i>
-                            <span>Invoices</span>
-                        </a>
-                        <a href="#" class="btn btn-link btn-float font-size-sm font-weight-semibold text-default">
-                            <i class="icon-calendar5 text-pink-300"></i>
-                            <span>Schedule</span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="breadcrumb-line breadcrumb-line-light header-elements-md-inline">
-                <div class="d-flex">
-                    <div class="breadcrumb">
-                        <a href="index.html" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> Home</a>
-                        <span class="breadcrumb-item active">Dashboard</span>
-                    </div>
-
-                    <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
-                </div>
-
-                <div class="header-elements d-none">
-                    <div class="breadcrumb justify-content-center">
-                        <a href="#" class="breadcrumb-elements-item">
-                            <i class="icon-comment-discussion mr-2"></i>
-                            Support
-                        </a>
-
-                        <div class="breadcrumb-elements-item dropdown p-0">
-                            <a href="#" class="breadcrumb-elements-item dropdown-toggle" data-toggle="dropdown">
-                                <i class="icon-gear mr-2"></i>
-                                Settings
-                            </a>
-
-                            <div class="dropdown-menu dropdown-menu-right">
-                                <a href="#" class="dropdown-item"><i class="icon-user-lock"></i> Account security</a>
-                                <a href="#" class="dropdown-item"><i class="icon-statistics"></i> Analytics</a>
-                                <a href="#" class="dropdown-item"><i class="icon-accessibility"></i> Accessibility</a>
-                                <div class="dropdown-divider"></div>
-                                <a href="#" class="dropdown-item"><i class="icon-gear"></i> All settings</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- /page header -->
 
 
     <div class="content">

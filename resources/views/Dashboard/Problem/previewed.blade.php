@@ -55,7 +55,9 @@ Previewed Problems
                 </tr>
             </thead>
             <div>
-                @foreach ($Problems as $item )
+
+
+                @foreach ($PreviewedProblem as $item )
                 <tr>
                     <td>{{$item->name}}</td>
                     <td>{{$item->user->name}}</td>
@@ -89,6 +91,7 @@ Previewed Problems
                 </tr>
             </div>
                 @endforeach
+
 
             </tbody>
         </table>

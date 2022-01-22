@@ -55,7 +55,7 @@
                 </tr>
             </thead>
             <div>
-                @foreach ($Problems as $item )
+                @foreach ($UnderReviewProblem as $item )
                 <tr>
                     <td>{{$item->name}}</td>
                     <td>{{$item->user->name}}</td>

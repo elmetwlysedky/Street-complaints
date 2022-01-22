@@ -131,27 +131,5 @@ class ProblemController extends Controller
 
     }
 
-    public function new()
-    {
-        $NewProblem = Problem::where('status', 'new')->get();
-        return view('Dashboard.Problem.index' );
-    }
 
-    public function under_review()
-    {
-        $UnderReviewProblem = Problem::where('status', 'under_review')->get();
-        return view('Dashboard.Problem.under_review', compact('UnderReviewProblem'));
-    }
-
-    public function previewed()
-    {
-        $PreviewedProblem = Problem::where('status' == 'previewed')->get();
-        return view('Dashboard.Problem.previewed' , compact('PreviewedProblem'));
-    }
-
-    public function closed()
-    {
-        $ClosedProblem = Problem::where('status', 'closed')->get();
-        return view('dashboard.Problem.closed', compact('ClosedProblem'));
-    }
 }
